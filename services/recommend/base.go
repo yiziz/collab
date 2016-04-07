@@ -48,10 +48,6 @@ func Bar() {
 	fmt.Println("end")
 }
 
-func FindPerksForUser(uid uint64) {
-
-}
-
 // Foo blah
 func Foo() {
 	dataMap := data.RedempData()
