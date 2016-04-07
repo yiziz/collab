@@ -43,7 +43,14 @@ func RecommendByTerms(c *gin.Context) {
 		badRequest(c)
 		return
 	}
-	pids := recommend.PerkByTerms(params.Terms)
-	// pids = []uint64{98}
+
+	var termMap map[string]float64
+	mod := 10.0
+	for _, term := range params.Terms {
+		termMap[term] = mod
+		mod /= 1.5
+	}
+
+	pids := recommend.PerkByTerms(termMap)
 	jsonOK(c, pids)
 }

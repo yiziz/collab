@@ -63,8 +63,7 @@ func PerkByPerk(pid uint64) []uint64 {
 
 // PerkByTerms returns perk id recommendations using terms (sl)
 func PerkByTerms(sl map[string]float64) []uint64 {
-	var perks map[string]float64
-	newUserId = 99999
+	newUserId := uint64(99999)
 
 	recMap := make(RecMap)
 	for term, score := range sl {
@@ -72,7 +71,7 @@ func PerkByTerms(sl map[string]float64) []uint64 {
 	}
 
 	Terms.Add(newUserId, recMap)
-	perks = PerkByUser(newUserId)
+	perks := PerkByUser(newUserId)
 	Terms.Delete(newUserId)
 
 	return perks

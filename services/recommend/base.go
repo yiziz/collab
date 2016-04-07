@@ -33,6 +33,9 @@ func Bar() {
 	fmt.Println(Terms.Count())
 	// fmt.Println(terms)
 
+	// Check equinox related perks
+	fmt.Println("EQUINOX RECOMMENDATIONS:", PerkByPerk(224))
+
 	for uid := range Um {
 		recs, _ := Terms.Recommend(uid)
 		// if len(recs) < 100 {
