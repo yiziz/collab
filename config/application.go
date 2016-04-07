@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/yiziz/collab/config/initializers"
 	"github.com/yiziz/collab/services/env"
+	"github.com/yiziz/collab/services/recommend"
 )
 
 // AppEnv determines what env the app is running in
@@ -47,7 +48,7 @@ func Run() {
 	// um := data.CalcUserTermScore(rm, pm)
 	// fmt.Println(um)
 
-	// recommend.Bar()
+	recommend.Bar()
 
 	r := gin.Default()
 	initializers.Initialize(r, AppEnv)

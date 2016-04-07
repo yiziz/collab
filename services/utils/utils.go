@@ -4,6 +4,7 @@ package utils
 
 import (
 	"encoding/csv"
+	"github.com/yiziz/collab/path"
 	"os"
 	"regexp"
 	"strings"
@@ -90,7 +91,7 @@ func RemoveNonAlphaNumeric(s string) (str string, err error) {
 }
 
 func stopwords() (s []string, err error) {
-	file, err := os.Open("/data/gocode/src/github.com/yiziz/collab/fixtures/stopwords.csv")
+	file, err := os.Open(path.ProjectPath() + "/fixtures/stopwords.csv")
 	// file, err := os.Open("stopwords.csv")
 	if err != nil {
 		return nil, err

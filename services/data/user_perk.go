@@ -3,6 +3,7 @@ package data
 import (
 	"encoding/csv"
 	"fmt"
+	"github.com/yiziz/collab/path"
 	"io"
 	"log"
 	"os"
@@ -104,8 +105,8 @@ func calcFile(file string, redempMap UserPerkRedemp, multi int) UserPerkRedemp {
 
 // RedempData func
 func RedempData() UserPerkRedemp {
-	redemps := "/data/gocode/src/github.com/yiziz/collab/fixtures/redemps.csv"
-	pageEvents := "/data/gocode/src/github.com/yiziz/collab/fixtures/pageevents.csv"
+	redemps := path.ProjectPath() + "/fixtures/redemps.csv"
+	pageEvents := path.ProjectPath() + "/fixtures/pageevents.csv"
 	// f, err := os.Open("/data/gocode/src/github.com/yiziz/collab/fixtures/redemps.csv")
 	// f, err := os.Open("/data/gocode/src/github.com/yiziz/collab/fixtures/pageevents.csv")
 	// f, err := os.Open("/data/gocode/src/github.com/yiziz/collab/fixtures/unweighted.csv")

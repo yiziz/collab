@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/reiver/go-porterstemmer"
+	"github.com/yiziz/collab/path"
 	"github.com/yiziz/collab/services/utils"
 )
 
@@ -208,7 +209,7 @@ func termFrequencyInverseDocumentFrequency(recordArray [][]string) (m map[string
 func loadPerksData(stopwords []string) map[uint64]string {
 	perks := make(map[uint64]string)
 	// file, err := os.Open("data/perks_data.csv")
-	file, err := os.Open("/data/gocode/src/github.com/yiziz/collab/fixtures/perks_data.csv")
+	file, err := os.Open(path.ProjectPath() + "/fixtures/perks_data.csv")
 
 	if err != nil {
 		fmt.Println("ERROR: ", err)
