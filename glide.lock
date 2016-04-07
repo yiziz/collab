@@ -1,0 +1,47 @@
+hash: ce8bf91689cc9e7517aafb21efdecdb034f105f06a7cdc2bf9760633854ff189
+updated: 2016-04-06T19:26:31.17606216-07:00
+imports:
+- name: github.com/bamzi/jobrunner
+  version: b79a44ab55237ca487725e813032e5ca0c2ea0e7
+- name: github.com/gin-gonic/gin
+  version: 233291e4e2d016084f9e42e786e45dad8858ace4
+  subpackages:
+  - binding
+  - render
+- name: github.com/go-sql-driver/mysql
+  version: 1421caf44f6464fd2ee8de694c7508ee13f92964
+- name: github.com/golang/protobuf
+  version: 2402d76f3d41f928c7902a765dfc872356dd3aad
+  subpackages:
+  - proto
+- name: github.com/gonum/matrix
+  version: 47ee7e7ebc07dcffca445fea03f4ba2c999eff12
+- name: github.com/inconshreveable/mousetrap
+  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/jinzhu/gorm
+  version: 5174cc5c242a728b435ea2be8a2f7f998e15429b
+- name: github.com/jinzhu/inflection
+  version: 3272df6c21d04180007eb3349844c89a3856bc25
+- name: github.com/manucorporat/sse
+  version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
+- name: github.com/muesli/regommend
+  version: 1e497bb21fbbae352d8a08d69b9ab700312c1362
+- name: github.com/reiver/go-porterstemmer
+  version: b4dd94e38f29620fe0f97ae4b0f6994b0d5d75f0
+- name: github.com/spf13/cobra
+  version: 4c05eb1145f16d0e6bb4a3e1b6d769f4713cb41f
+- name: github.com/spf13/pflag
+  version: 7f60f83a2c81bc3c3c0d5297f61ddfa68da9d3b7
+- name: github.com/spf13/viper
+  version: c975dc1b4eacf4ec7fdbf0873638de5d090ba323
+- name: golang.org/x/net
+  version: f315505cf3349909cdf013ea56690da34e96a451
+  subpackages:
+  - context
+- name: gopkg.in/go-playground/validator.v8
+  version: c193cecd124b5cc722d7ee5538e945bdb3348435
+- name: gopkg.in/robfig/cron.v2
+  version: be2e0b0deed5a68ffee390b4583a13aff8321535
+- name: gopkg.in/yaml.v2
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
+devImports: []

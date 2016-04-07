@@ -1,0 +1,22 @@
+# go binary if built
+collab
+
+# tmp folder created by fresh
+tmp/
+
+# don't store data
+fixtures/
+
+# config
+config/application.yml
+config/database.yml
+
+# 3rd party gocode
+vendor/
+
+# temp files
+*~
+*.swp
+
+# cache
+.DS_Store

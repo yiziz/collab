@@ -1,0 +1,11 @@
+development:
+  adapter: mysql
+  database: collab_development
+  username: root
+  password:
+
+test:
+  adapter: mysql
+  database: collab_test
+  username: root
+  password:
