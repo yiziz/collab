@@ -57,8 +57,18 @@ func PerkByUser(uid uint64) []uint64 {
 
 // PerkByPerk returns perk id recommendations using pid
 func PerkByPerk(pid uint64) []uint64 {
-	perkTerms := Pm[pid]
-	return PerkByTerms(perkTerms)
+	var perks []uint64
+	neighbors, err := PerkTerms.Neighbors(pid)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, neighbor := range neighbors[:5] {
+		perks = append(perks, neighbor.Key.(uint64))
+	}
+
+	return perks
 }
 
 // PerkByTerms returns perk id recommendations using terms (sl)

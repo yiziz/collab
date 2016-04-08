@@ -13,6 +13,7 @@ var Rm data.UserPerkRedemp
 var Pm data.PerkTermScore
 var Um data.UserTermScore
 var Terms *regommend.RegommendTable
+var PerkTerms *regommend.RegommendTable
 
 // Bar blah
 func Bar() {
@@ -20,7 +21,7 @@ func Bar() {
 	Pm = data.PerkTermScores()
 	Um = data.CalcUserTermScore(Rm, Pm)
 
-	Terms = regommend.Table("terms")
+	Terms = regommend.Table("user_terms")
 
 	for uid, termMap := range Um {
 		rm := make(RecMap)
@@ -30,11 +31,22 @@ func Bar() {
 		Terms.Add(uid, rm)
 	}
 
+	PerkTerms = regommend.Table("perk_terms")
+
+	for perkId, termMap := range Pm {
+		rm := make(RecMap)
+		for term, score := range termMap {
+			rm[term] = float64(score)
+		}
+		PerkTerms.Add(perkId, rm)
+	}
+
 	fmt.Println(Terms.Count())
+	fmt.Println(PerkTerms.Count())
 	// fmt.Println(terms)
 
 	// Check equinox related perks
-	fmt.Println("EQUINOX RECOMMENDATIONS:", PerkByPerk(224))
+	fmt.Println("crunch RECOMMENDATIONS:", PerkByPerk(2788))
 
 	for uid := range Um {
 		recs, _ := Terms.Recommend(uid)
