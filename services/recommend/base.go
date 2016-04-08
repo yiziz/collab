@@ -2,6 +2,7 @@ package recommend
 
 import (
 	"fmt"
+
 	"github.com/muesli/regommend"
 	"github.com/yiziz/collab/services/data"
 )
@@ -46,20 +47,20 @@ func Bar() {
 	// fmt.Println(terms)
 
 	// Check equinox related perks
-	fmt.Println("crunch RECOMMENDATIONS:", PerkByPerk(2788))
-
-	for uid := range Um {
-		recs, _ := Terms.Recommend(uid)
-		// if len(recs) < 100 {
-		if len(recs) != 0 {
-			//fmt.Println("recs: ", uid, " ", len(recs))
-			//fmt.Println(recs[:10])
-			// fmt.Println(recs)
-		}
-
-		perks := PerkByUser(uid)
-		fmt.Println(perks)
-	}
+	// fmt.Println("crunch RECOMMENDATIONS:", PerkByPerk(2788))
+	//
+	// for uid := range Um {
+	// 	recs, _ := Terms.Recommend(uid)
+	// 	// if len(recs) < 100 {
+	// 	if len(recs) != 0 {
+	// 		//fmt.Println("recs: ", uid, " ", len(recs))
+	// 		//fmt.Println(recs[:10])
+	// 		// fmt.Println(recs)
+	// 	}
+	//
+	// 	perks := PerkByUser(uid)
+	// 	fmt.Println(perks)
+	// }
 	fmt.Println("end")
 }
 
