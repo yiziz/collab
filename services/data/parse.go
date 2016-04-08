@@ -97,15 +97,10 @@ func (t WordScoreArray) Swap(i, j int) {
 // Providing a threshold (1.0 >= x > 0.0) will return only the words
 // that appear in all the documents (x*100)% of the time
 func termFrequency(recordArray [][]string, threshold float64) (m map[string]int, err error) {
-	saveMap := make(map[string]map[string]int)
+	documentFrequencyMap := make(map[string]int)
+
 	for _, record := range recordArray {
-		url := record[0]
-
-		if _, ok := saveMap[url]; ok {
-			continue
-		}
-
-		words := utils.LowercaseWords(strings.Fields(record[2]))
+		words := utils.LowercaseWords(record)
 
 		for i := range words {
 			w, err := utils.RemoveNonAlphaNumeric(words[i])
@@ -121,29 +116,36 @@ func termFrequency(recordArray [][]string, threshold float64) (m map[string]int,
 			return nil, err
 		}
 
-		saveMap[url] = utils.WordFrequency(words)
-	}
-
-	documentFrequencyMap := make(map[string]int)
-
-	for _, wordCountMap := range saveMap {
-		for word := range wordCountMap {
+		for word, frequency := range utils.WordFrequency(words) {
 			if _, ok := documentFrequencyMap[word]; ok {
-				documentFrequencyMap[word]++
+				documentFrequencyMap[word] += frequency
 			} else {
-				documentFrequencyMap[word] = 1
+				documentFrequencyMap[word] = frequency
 			}
 		}
 	}
 
 	if threshold != 0.0 {
-		for word, value := range documentFrequencyMap {
-			if float64(value)/float64(len(saveMap)) < threshold {
-				delete(documentFrequencyMap, word)
+	}
+	return documentFrequencyMap, nil
+}
+
+func perkFrequency(userPerkRedemps UserPerkRedemp) (m map[string]int, err error) {
+	perkFrequencyMap := make(map[string]int)
+
+	for _, perkRedeemMap := range userPerkRedemps {
+		for pid, redeemCount := range perkRedeemMap {
+			word := strconv.Itoa(int(pid))
+
+			if _, ok := perkFrequencyMap[word]; ok {
+				perkFrequencyMap[word] += int(redeemCount)
+			} else {
+				perkFrequencyMap[word] = int(redeemCount)
 			}
 		}
 	}
-	return documentFrequencyMap, nil
+
+	return perkFrequencyMap, nil
 }
 
 // Inverse Document Frequency
@@ -184,6 +186,30 @@ func inverseDocumentFrequency(recordArray [][]string) (m map[string]float64, err
 		idfMap[word] = math.Log(d / float64(value))
 	}
 	return idfMap, nil
+}
+
+func idfPerks(userPerkRedemps UserPerkRedemp) (m map[string]float64, err error) {
+	length := float64(len(userPerkRedemps))
+	wordCountMap := make(map[string]int)
+	perkCountMap := make(map[string]float64)
+
+	for _, redemptions := range userPerkRedemps {
+		for perkId, _ := range redemptions {
+			word := strconv.Itoa(int(perkId))
+
+			if _, ok := wordCountMap[word]; ok {
+				wordCountMap[word]++
+			} else {
+				wordCountMap[word] = 1
+			}
+		}
+	}
+
+	for word, value := range wordCountMap {
+		perkCountMap[word] = math.Log(length / float64(value))
+	}
+
+	return perkCountMap, nil
 }
 
 // Term Frequency-Inverse Document Frequency (TF-IDF)
