@@ -261,6 +261,8 @@ func loadPerksData(stopwords []string) map[uint64]string {
 	return perks
 }
 
+var TermScores map[string]float64
+
 func PerkTermScores() map[uint64]map[string]float64 {
 	perks_data := loadPerksData(nil)
 	var entire_data [][]string
@@ -269,8 +271,8 @@ func PerkTermScores() map[uint64]map[string]float64 {
 		entire_data = append(entire_data, strings.Split(perk_data, " "))
 	}
 
-	term_scores, _ := termFrequencyInverseDocumentFrequency(entire_data)
-	print_term_scores(term_scores)
+	TermScores, _ := termFrequencyInverseDocumentFrequency(entire_data)
+	print_term_scores(TermScores)
 
 	perks_to_terms := make(map[uint64]map[string]float64)
 
@@ -279,7 +281,7 @@ func PerkTermScores() map[uint64]map[string]float64 {
 		terms_on_perk := perks_to_terms[perk_id]
 
 		for _, term := range strings.Split(perk_terms, " ") {
-			score := term_scores[term]
+			score := TermScores[term]
 
 			if score > 0 {
 				terms_on_perk[term] = score

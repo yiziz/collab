@@ -4,7 +4,9 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/reiver/go-porterstemmer"
 	"github.com/yiziz/collab/app/parsers"
+	"github.com/yiziz/collab/services/data"
 	"github.com/yiziz/collab/services/recommend"
 )
 
@@ -45,10 +47,9 @@ func RecommendByTerms(c *gin.Context) {
 	}
 
 	var termMap map[string]float64
-	mod := 10.0
 	for _, term := range params.Terms {
-		termMap[term] = mod
-		mod /= 1.5
+		stemmedTerm := porterstemmer.StemString(term)
+		termMap[stemmedTerm] = data.TermScores[stemmedTerm]
 	}
 
 	pids := recommend.PerkByTerms(termMap)
