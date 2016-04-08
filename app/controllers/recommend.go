@@ -56,6 +56,18 @@ func RecommendByTerms(c *gin.Context) {
 	fmt.Println("TERMMAP")
 	fmt.Println(termMap)
 
-	pids := recommend.PerkByTerms(termMap)
+	pids := recommend.PerkByTermsThruPerk(termMap)
+	pid_user := recommend.PerkByTerms(termMap)
+
+	if len(pids) > 5 {
+		pids = pids[:5]
+	}
+
+	if len(pid_user) > 5 {
+		pid_user = pid_user[:5]
+	}
+
+	pids = append(pids, pid_user...)
+
 	jsonOK(c, pids)
 }

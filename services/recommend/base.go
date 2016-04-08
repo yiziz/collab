@@ -44,6 +44,8 @@ func Bar() {
 
 	fmt.Println(Terms.Count())
 	fmt.Println(PerkTerms.Count())
+
+	//fmt.Println("derp recoommendsations:", PerkByTermsThruPerk(map[string]float64{"ticket": 1081.4701543587407, "entertain": 0, "concert": 52.09396263715782}))
 	// fmt.Println(terms)
 
 	// Check equinox related perks

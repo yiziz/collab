@@ -80,6 +80,27 @@ func PerkByPerk(pid uint64) []uint64 {
 	return perks
 }
 
+func PerkByTermsThruPerk(sl map[string]float64) []uint64 {
+	newUserId := uint64(99999)
+
+	recMap := make(RecMap)
+	for term, score := range sl {
+		recMap[term] = score
+	}
+
+	PerkTerms.Add(newUserId, recMap)
+	perks := PerkByPerk(newUserId)
+	fmt.Println("QQQQQQQQQQ")
+	fmt.Println(recMap)
+	fmt.Println(perks)
+	PerkTerms.Delete(newUserId)
+
+	if len(perks) > 10 {
+		perks = perks[:10]
+	}
+	return perks
+}
+
 // PerkByTerms returns perk id recommendations using terms (sl)
 func PerkByTerms(sl map[string]float64) []uint64 {
 	newUserId := uint64(99999)
