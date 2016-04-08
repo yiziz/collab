@@ -2,14 +2,17 @@ package recommend
 
 import (
 	"fmt"
-	"github.com/yiziz/collab/services/data"
 	"sort"
+
+	"github.com/yiziz/collab/services/data"
 )
 
 // PerkByUser returns perk id recommendations using uid
 func PerkByUser(uid uint64) []uint64 {
 	var perks []uint64
 	neighbors, _ := Terms.Neighbors(uid)
+
+	fmt.Println("NEIGHBORS LENGTH: ", len(neighbors))
 
 	if len(neighbors) != 0 {
 		unseenPerks := make(map[uint64]float64)
@@ -52,6 +55,9 @@ func PerkByUser(uid uint64) []uint64 {
 		fmt.Println("Id:", uid, "data:", Rm[uid])
 	}
 
+	if len(perks) > 10 {
+		perks = perks[:10]
+	}
 	return perks
 }
 
@@ -68,6 +74,9 @@ func PerkByPerk(pid uint64) []uint64 {
 		perks = append(perks, neighbor.Key.(uint64))
 	}
 
+	if len(perks) > 10 {
+		perks = perks[:10]
+	}
 	return perks
 }
 
@@ -82,7 +91,13 @@ func PerkByTerms(sl map[string]float64) []uint64 {
 
 	Terms.Add(newUserId, recMap)
 	perks := PerkByUser(newUserId)
+	fmt.Println("PPPPPPPPP")
+	fmt.Println(recMap)
+	fmt.Println(perks)
 	Terms.Delete(newUserId)
 
+	if len(perks) > 10 {
+		perks = perks[:10]
+	}
 	return perks
 }

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -44,12 +45,15 @@ func RecommendByTerms(c *gin.Context) {
 		return
 	}
 
-	var termMap map[string]float64
+	termMap := make(map[string]float64)
 	mod := 10.0
 	for _, term := range params.Terms {
 		termMap[term] = mod
 		mod /= 1.5
 	}
+
+	fmt.Println("TERMMAP")
+	fmt.Println(termMap)
 
 	pids := recommend.PerkByTerms(termMap)
 	jsonOK(c, pids)
